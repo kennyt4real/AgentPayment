@@ -1,0 +1,89 @@
+﻿@page
+@model IndexModel
+@{
+    Layout = null;
+    ViewData["Title"] = "Home page";
+}
+
+<div class="row">
+    <div class="col-md-8">
+    </div>
+
+</div>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>MobileForms</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="icon" type="image/x-icon" href="~/assets/Assets/img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet">
+
+    <!-- build:css -->
+    <link rel="stylesheet" type="text/css" href="~/assets/Assets/css/fonts.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/Assets/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/Assets/css/animate.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/Assets/css/main.css" />
+
+    <link rel="shortcut icon" href="~/favicon.ico" />
+
+    <!-- endbuild -->
+    <!-- tracking code -->
+
+</head>
+
+<body>
+
+
+
+
+    <div class="auth">
+
+        <div class="clearfix container">
+            <div class="auth_logo_wrap margin_center column col_6">
+                <img src="~/assets/Assets/img/mobile_logo_blue.svg">
+            </div>
+        </div>
+        <div class="text-center">
+            @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+            {
+                <h6 class="text-success">@Model.ErrorMessage</h6>
+            }
+        </div>
+       
+
+        <div class="col_5 margin_center login_box">
+
+            <h3 class="mb4 align_center">Welcome </h3>
+            <h6 class="mb4 align_center">Enter your Email to view your verified records</h6>
+            <div class="col_8 margin_center pt">
+                <form asp-page="./Privacy" method="get">
+
+                    <div class="">
+                        <label>Email Address</label>
+                        <input class="mb" name="agentEmail" placeholder="Enter your Email" type="email" required="" />
+                    </div>
+
+                    <input type="submit" value="View Payment Details" class="btn block_disp" />
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript" src="~/assets/Assets/js/script.js"></script>
+
+</body>
+
+</html>
+

@@ -1,0 +1,283 @@
+﻿@page
+@model PrivacyModel
+@{
+    Layout = null;
+    ViewData["Title"] = "Privacy Policy";
+}
+@*<h1>@ViewData["Title"]</h1>*@
+<head>
+    <link rel="shortcut icon" href="~/favicon.ico" />
+
+</head>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="~/assets/invoice.css" rel="stylesheet">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+
+                <div class="card-body p-0">
+                    <div class="row p-5">
+                        <div class="col-md-5">
+                            <img height="150" width="150" src="~/mobile_logo_blue.svg">
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <a asp-page="./Index" class="btn btn-link">BACK TO VERIFICATION PAGE</a>
+                        </div>
+                        @if (Model.AgentPaymentDetailsVm.AgentPaymentDetails != null && Model.AgentPaymentDetailsVm.AgentPaymentDetails.Any())
+                        {
+                            <div class="col-md-4 text-right">
+                                <p class="font-weight-bold mb-1">Agent No: @Model.AgentPaymentDetailsVm?.AgentPaymentDetails?.First().Id</p>
+                                <p class="text-muted"></p>
+                            </div>
+                        }
+
+                    </div>
+
+                    <hr class="my-5">
+                    @if (Model.AgentPaymentDetailsVm != null && Model.AgentPaymentDetailsVm.AgentPaymentDetails != null && !Model.AgentPaymentDetailsVm.AlreadyAcceptedTerms)
+                    {
+                        <div class="row pb-5 p-5">
+
+                            <div class="col-md-4">
+                                <p class="font-weight-bold mb-4">Agent Information</p>
+                                <p class="mb-1">Name: @Model.AgentPaymentDetailsVm?.AgentPaymentDetails?.First().Name</p>
+                                <p class="mb-1">Email: @Model.AgentPaymentDetailsVm?.AgentPaymentDetails?.First().EmailAddress</p>
+                            </div>
+
+                            @*<div class="col-md-4 text-center">
+                                    <img height="100" src="~/fraud-removebg-preview.png"><br />
+                                    <span class="text-danger">This account has been flagged by the <b>Bank Of Industry</b>, hence Payment will not be processed.</span>
+                                </div>*@
+
+                        </div>
+
+                        <div class="row p-5">
+                            <div class="col-md-12">
+                                <table class="table">
+                                    <thead class="text-center">
+                                        <tr>
+                                            <th class="border-0 text-uppercase small font-weight-bold">State</th>
+                                            <th class="border-0 text-uppercase small font-weight-bold">Bank Name</th>
+                                            <th class="border-0 text-uppercase small font-weight-bold">Account Number</th>
+                                            <th class="border-0 text-uppercase small font-weight-bold">Amount Due (#)</th>
+                                            <th class="border-0 text-uppercase small font-weight-bold">Status</th>
+                                            <th class="border-0 text-uppercase small font-weight-bold">Payment Balance Status</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-center">
+                                        @foreach (var item in Model?.AgentPaymentDetailsVm?.AgentPaymentDetails)
+                                        {
+                                            <tr>
+                                                <td>@item?.State.ToUpper()</td>
+                                                <td>@item?.Bank.ToUpper()</td>
+                                                <td>@item?.AccountNumber</td>
+                                                <td>@item?.AmountDue</td>
+                                                <td class="text-danger">@item?.Status.ToUpper()</td>
+                                                <td>@item?.PaymentBalanceStatus</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-row-reverse bg-dark text-white p-4">
+                            @*@if (!string.IsNullOrEmpty(Model.AgentPaymentDetailsVm.PaymentBalanceStatus))
+                                {
+                                    <div class="py-3 px-5 text-right">
+                                        <div class="mb-2">Payment Balance Status:</div>
+                                        <div class="h2 font-weight-light">@Model.AgentPaymentDetailsVm?.PaymentBalanceStatus</div>
+                                    </div>
+                                }*@
+
+                            <div class="py-3 px-5 text-right">
+                                <div class="mb-2">Total Amount Due:</div>
+                                <div class="h2 font-weight-light">#@Model.AgentPaymentDetailsVm?.TotalDuePayment</div>
+                            </div>
+                        </div>
+                        @if (Model.AgentPaymentDetailsVm.TotalDuePayment > 0)
+                        {
+                            <div class="card-body p-0">
+                                <div class="row p-5">
+                                    <div>
+                                        <header class="text-center">
+                                            <b>SETTLEMENT AGREEMENT</b>
+                                        </header>
+                                        <div>
+                                            This <b>SETTLEMENT AGREEMENT</b> is entered into on this 30th day of November, 2020. Between: <b>CROWDFORCE NIGERIA LIMITED</b> AND <b>FIELD AGENT (“AGENT”)</b>.<br />
+                                            <b>CROWDFORCE</b> and <b>AGENT</b> shall both be referred to as “Parties” and the word “Party” shall be construed accordingly.
+                                            <br />
+                                            <br />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <header>
+                                            <b>BACKGROUND</b>
+                                        </header>
+                                        <div>
+                                            <ol>
+                                                <li>
+                                                    In 2018, Crowdforce contracted Field Agents including the undersigned to enumerate and collect the data of Petty Traders across Nigeria for the Trader Moni Phase 1 Project.
+                                                </li>
+                                                <li>
+                                                    The Field agents enumerated over three (3) million petty traders and over 50% of the records collected were rejected by Bank of Industry (“BOI”) as a result of:
+                                                    <ul>
+                                                        <li>Fraud;</li>
+                                                        <li>Duplicate registration;</li>
+                                                        <li>Wrong phone numbers;</li>
+                                                        <li>Unqualified beneficiaries;</li>
+                                                        <li>Wrong GPS, cluster location and State; and</li>
+                                                        <li>Sharing of login details among field agents during enumerations.</li>
+
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    Consequently, BOI approved and paid for less than 50% of the records submitted by the Agents.
+                                                </li>
+                                                <li>
+                                                    Further to the above, CrowdForce shall make best efforts to settle all its Field Agents for the records collected, predominantly from its account, in the interest of fairness and as a gesture of goodwill.
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <header class="text-center">
+                                            <b>SETTLEMENT TERMS AND CONDITIONS</b>
+                                        </header>
+                                        <div>
+                                            In consideration of the mutual covenants between the Parties, the Parties agree as follows.
+                                        </div>
+                                        <ol>
+                                            <li>
+                                                PROMISE TO PAY:
+                                                <ul>
+                                                    <li>
+                                                        Crowdforce has identified the efforts and understanding of its Agents under the current circumstances and has agreed to pay the Agents based on the verified records on the Mobile Forms Portal majorly from the Company's pocket.
+                                                    </li>
+                                                    <li>
+                                                        The Agent hereby accepts the Settlement Amount due to him or her (as shown in the Payment Link) as the full and final payment for the records collected during the Trader Moni Phase 1 Project.
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                PAYMENT: In order to process the payment of the Settlement Amount, the Agent shall be required to:
+                                                <ul>
+                                                    <li>
+                                                        Execute this Settlement Agreement by clicking “ACCEPT” on the payment link; and
+
+                                                    </li>
+                                                    <li>
+                                                        Forward his/her full Bank Account Details (including Sort Code).
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <b>MUTUAL RELEASE OF ALL CLAIMS:</b><br />
+                                                In consideration for the faithful performance of the terms of this Settlement Agreement, the Agent, for themselves, their successors, assigns, and (in the case of the Contractor) subcontractors (at any tier), do hereby relinquish, waive, release, acquit and forever discharge each other of and from any and all claims, disputes, actions, charges, contractual obligations, complaints, causes of action, rights, demands, debts, damages, or accountings of whatever nature, at law or in equity, known or unknown, asserted or not asserted, which they have now or may have in the future against one another, based on any actions or events which occurred prior to the date of this Settlement Agreement, including without limitation the aforesaid Trader Moni Project and those arising out of or related to the aforesaid Trader Moni Project on any claims for delay, disruption and impact, any claims (including statutorily based claims) for attorneys' fees and costs incurred in connection with them, and any claims for interest, except as provided for in this Settlement Agreement.
+                                            </li>
+                                            <li>
+                                                <b>NO ADMISSION OF LIABILITY:</b> Neither this Settlement Agreement nor anything contained within it shall be an admission of liability or wrongdoing on the part Crowdforce.
+                                            </li>
+                                            <li>
+                                                <b>BINDING EFFECT: </b>This Settlement Agreement shall be binding upon and inure to the benefit of the parties' respective heirs, successors, assigns and personal representatives.
+
+                                            </li>
+                                            <li>
+                                                <b>NON-ASSIGNMENT:</b> A party's rights under this Settlement Agreement may not be assigned without the express written consent of the other party, which consent may be given only in accordance with applicable law and regulation.
+
+                                            </li>
+                                            <li>
+                                                <b>ADDITIONAL DOCUMENTS: </b>The parties agree to execute whatever modification(s) of the Contract, invoices, and any and all other additional documents as may be reasonably necessary to carry out the terms, conditions and obligations of this Settlement Agreement.
+
+                                            </li>
+                                            <li>
+                                                <b>INTEGRATION:</b> This Settlement Agreement is entered into by each of the parties without reliance upon any statement, representation, promise, inducement, or agreement not expressly contained herein. This Settlement Agreement constitutes the entire agreement between the parties concerning the aforesaid settlement and release of claims.
+                                            </li>
+                                            <li>
+                                                <b>SEVERABILITY: </b>If any portions of this Settlement Agreement are held invalid and unenforceable, all remaining portions shall nevertheless remain valid and enforceable, to the extent they can be given effect without the invalid portions.
+
+                                            </li>
+                                            <li>
+                                                <b>COUNTERPARTS: </b>This Settlement Agreement may be executed in any number of copies, each of which shall be deemed to be a counterpart original.
+
+                                            </li>
+                                            <li>
+                                                <b>REPRESENTATION OF AUTHORITY:</b> Each person signing this Settlement Agreement hereby represents and warrants that he or she has the authority to execute this Agreement and/or to bind the entity on behalf of which he or she has signed.
+
+                                            </li>
+                                            <li>
+                                                <b>UNDERSTANDING THE TERMS:</b> The Agent unequivocally agrees that he/she clearly understands the terms and conditions contained in this Settlement Agreement and the consequences for signing the same has been explained to his/her understanding.
+
+                                            </li>
+                                        </ol>
+                                        <div>
+                                            <b>IN WITNESS WHEREOF</b>, the parties hereto have executed this Settlement Agreement on the date written above.
+
+                                            By clicking<b>“ACCEPT”</b>, the <b>FIELD AGENT</b> hereby executes this Settlement Agreement and agrees to all the terms and conditions contained therein.
+
+                                            @*For and on behalf of Crowdforce Nigeria Limited (“Crowdforce”)
+                                                Name:
+                                                Designation:
+                                                Signature:
+                                                Date:*@
+                                            <br />
+                                            <br />
+                                        </div>
+                                    </div>
+
+                                    <form asp-page="./Privacy" class="col-md-12  text-center" method="post">
+                                        <div>
+                                            <input hidden name="agentEmail" value="@Model.AgentPaymentDetailsVm.AgentPaymentDetails.First().EmailAddress" />
+                                            <input hidden name="agentAccountNumber" value="@Model.AgentPaymentDetailsVm.AgentPaymentDetails.First().AccountNumber" />
+
+                                            <input type="submit" value="ACCEPT" id="button" class="text-uppercase btn btn-rounded mb-5 btn-info" />
+
+                                            <a asp-page="./Index" class="text-uppercase btn btn-rounded mb-5 btn-warning" data-dismiss="modal">DECLINE</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        }
+                    }
+                    else if (Model.AgentPaymentDetailsVm != null && Model.AgentPaymentDetailsVm.AlreadyAcceptedTerms)
+                    {
+                        <div class="row p-5">
+
+                            <div class="col-md-12 text-md-center">
+
+                                <p class="text-success">Payment Terms Accepted Successfully</p>
+
+                                <p class="font-weight-bold mb-1">Thank you for accepting our payment Terms and Condition.</p>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="row p-5">
+
+                            <div class="col-md-12 text-md-center">
+
+                                <p class="text-danger">Invalid Email</p>
+
+                                <p class="font-weight-bold mb-1">Please enter a valid email address.</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-light mt-5 mb-5 text-center small">by : <a class="text-light" target="_blank" href="https://crowdforce.io">mobileforms</a></div>
+
+</div>
+
+
